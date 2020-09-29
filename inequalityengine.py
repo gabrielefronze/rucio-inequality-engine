@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 OP = {
         ' == ' : ['==', ' = ', ' eq ', ' -eq '],
         ' > ' : [' > ', ' gt ', ' -gt '],
@@ -33,14 +35,10 @@ class inequality_engine:
     def run(self):
         return any(map(lambda and_group: all(map(lambda expr: eval(expr), and_group)), self.filters))
 
+import sys
+
 if __name__ == "__main__":
-    string = "5 > 2, True and True, True or False; 6 < 5 > 4"
+    string = ''.join(sys.argv[1:])
     ie = inequality_engine(string)
     print(ie.filters)
     print(ie.run())
-    # x = 1
-    # y = 0
-    # for op in VALID_OP:
-    #     string = 'x'+op+'y'+op+'-2'
-    #     op_string = clear_double_spaces(translate(clear_double_spaces(string)))
-    #     print('{} -> {}'.format(op_string, eval(op_string)))
