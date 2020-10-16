@@ -62,6 +62,25 @@ class TestInequalityEngine(unittest.TestCase):
         string = "100 < 42; False; 7 > 8; 2**10 == 1024"
         self.assertTrue(inequality_engine(string).run())
 
+    def test_RangeConversion(self):
+        string = "2 < 10 < 100"
+        self.assertTrue(inequality_engine(string).run())
+
+        string = "20 > 10 < 100"
+        self.assertTrue(inequality_engine(string).run())
+
+        string = "2 < 100 <= 100"
+        self.assertTrue(inequality_engine(string).run())
+
+        string = "2 < 100 < 100"
+        self.assertFalse(inequality_engine(string).run())
+
+        string = "20 > 10 > 100"
+        self.assertFalse(inequality_engine(string).run())
+
+        string = "20 >= 20 >= 100"
+        self.assertFalse(inequality_engine(string).run())
+
     def test_InequalityEngine(self):
         string = "True, True; True"
         self.assertTrue(inequality_engine(string).run())
